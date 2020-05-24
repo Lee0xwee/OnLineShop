@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <!--解决表单post提交方式中文乱码-->
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.multipart.saveDir" value="D:/IDEA_workspace/temp"/>
+
+    <package name="shop" extends="struts-default" namespace="/">
+
+        <!--声明拦截器-->
+        <interceptors>
+            <interceptor name="privilegeIntercept" class="cn.Lee.shop.iterceptor.PrivilegeInterceptor"></interceptor>
+            <interceptor-stack name="interceptStack">
+                <interceptor-ref name="privilegeIntercept"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="interceptStack"></default-interceptor-ref>
+
+        <global-results>
+            <result name="fail">/admin/index.jsp</result>
+        </global-results>
+
+    </package>
+
+
+</struts>
